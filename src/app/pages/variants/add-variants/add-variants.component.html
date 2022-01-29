@@ -1,0 +1,39 @@
+<div style="width: 400px; margin: auto">
+
+  <form [formGroup]="variantsForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" nz-input placeholder="Catalog Title">
+    <br />
+    <br />
+    <!--       [(ngModel)]="selectedUser"
+      (nzOnSearch)="onSearch($event)" -->
+    <nz-select
+      nzPlaceHolder="Select Catalog"
+      nzAllowClear
+      nzShowSearch
+      nzServerSearch
+      formControlName="catalog_id"
+    >
+      <ng-container *ngFor="let o of catalog">
+        <nz-option *ngIf="!isLoading" [nzValue]="o.id" [nzLabel]="o.title"></nz-option>
+      </ng-container>
+      <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+        <i nz-icon nzType="loading" class="loading-icon"></i>
+        Loading Data...
+      </nz-option>
+    </nz-select>
+    <br />
+    <br />
+    <input formControlName="description" nz-input placeholder="Catalog Description">
+    <br />
+    <br />
+    <button type="submit" nz-button nzType="primary" nzBlock>Add</button>
+  </form>
+
+</div>
+
+<div *ngIf="processing" class="overlay">
+  <nz-spin></nz-spin>
+</div>
+
+<!-- <input #barInput type="text" (window:keypress)="onKey($event)"  autofocus />
+            <p>barcode: {{ barcode }}</p> -->

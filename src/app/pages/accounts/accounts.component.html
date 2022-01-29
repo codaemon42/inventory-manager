@@ -1,0 +1,47 @@
+
+    <button (click)="downloadBarCodes()" nz-button nzType="primary" >
+      <i nz-icon nzType="file-excel" nzTheme="fill"></i>
+      Download BarCodes
+    </button>
+
+<nz-table #editRowTable nzBordered [nzData]="accounts" [nzScroll]="{ x: '1150px', y: '600px' }" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th nzWidth="80px">Id</th>
+          <th nzWidth="110px">product_id</th>
+          <th nzWidth="150px">product_title</th>
+          <th nzWidth="110px">variant_id</th>
+          <th nzWidth="150px">variant_title</th>
+          <th nzWidth="110px">catalog_id</th>
+          <th nzWidth="150px">catalog_title</th>
+          <th nzWidth="150px">total_price</th>
+          <th nzWidth="150px">total_quantity</th>
+          <th nzWidth="100px">last modified_at</th>
+          <th nzWidth="100px">created_at</th>
+          <th nzWidth="300px">barcode</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <ng-container>
+            <td nzWidth="80px">{{ data.id }}</td>
+            <td nzWidth="110px">{{ data.product_id }}</td>
+            <td nzWidth="150px">{{ data.product_title }}</td>
+            <td nzWidth="110px">{{ data.variant_id }}</td>
+            <td nzWidth="150px">{{ data.variant_title }}</td>
+            <td nzWidth="110px">{{ data.catalog_id }}</td>
+            <td nzWidth="150px">{{ data.catalog_title }}</td>
+            <td nzWidth="150px">{{ data.total_price }}</td>
+            <td nzWidth="150px">{{ data.total_quantity }}</td>
+            <td nzWidth="100px">{{ data.modified_at | date:'short' }}</td>
+            <td nzWidth="100px">{{ data.created_at | date:'short' }}</td>
+            <td nzWidth="300px"><ngx-barcode bc-width="1" bc-height="35" [bc-value]="data.product_id+'c'+data.variant_id+'c'+data.id" [bc-display-value]="false"></ngx-barcode></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>
+
+
+<div id="printable">
+  <ngx-barcode *ngFor="let data of accounts" bc-width="1" bc-height="35" [bc-value]="data.product_id+'c'+data.variant_id+'c'+data.id" [bc-display-value]="false"></ngx-barcode>
+</div>

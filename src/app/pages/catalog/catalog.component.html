@@ -1,0 +1,25 @@
+<button [routerLink]="['/', 'catalogs', 'add']" nz-button nzType="primary">Add New Catalog</button>
+<br>
+<br>
+<nz-table #editRowTable nzBordered [nzData]="products" [nzScroll]="{ x: '1150px', y: '600px' }" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th nzWidth="100px">Id</th>
+          <th nzWidth="100px">uuid</th>
+          <th nzWidth="100px">Title</th>
+          <th nzWidth="150px">description</th>
+          <th nzWidth="100px">created_at</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <ng-container>
+            <td nzWidth="100px">{{ data.id }}</td>
+            <td nzWidth="100px">{{ data.uuid }}</td>
+            <td nzWidth="100px">{{ data.title }}</td>
+            <td nzWidth="150px">{{ data.description }}</td>
+            <td nzWidth="100px">{{ data.created_at | date:'short' }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>

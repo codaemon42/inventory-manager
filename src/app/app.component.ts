@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'inventory-manager';
+  isCollapsed = false;
+
+  isLoggedIn = false;
+
+  constructor(
+    private authService: AuthService
+  ) {
+    this.isLoggedIn = this.authService.loggedIn;
+  }
 }

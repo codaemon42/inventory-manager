@@ -1,0 +1,54 @@
+<div style="width: 400px; margin: auto">
+
+  <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" nz-input placeholder="Title*">
+    <br />
+    <br />
+    <input formControlName="description" nz-input placeholder="Description">
+    <br />
+    <br />
+    <nz-select
+      formControlName="product_id"
+      nzPlaceHolder="Select Product*"
+      nzAllowClear
+      nzShowSearch
+      nzServerSearch
+      (nzOnSearch)="onSearchProduct($event)"
+    >
+      <ng-container *ngFor="let p of products">
+        <nz-option *ngIf="!isLoadingProduct" [nzValue]="p.id+'_'+p.title" [nzLabel]="p.title"></nz-option>
+      </ng-container>
+       <nz-option *ngIf="isLoadingProduct" nzDisabled nzCustomContent>
+        <i nz-icon nzType="loading" class="loading-icon"></i>
+        Loading Data...
+      </nz-option>
+    </nz-select>
+    <br />
+    <br />
+    <nz-select
+      formControlName="variant_id"
+      nzPlaceHolder="Select variants*"
+      nzAllowClear
+      nzShowSearch
+    >
+      <ng-container *ngFor="let v of variants">
+        <nz-option  [nzValue]="v.id+'_'+v.title+'_'+v.catalog_id+'_'+v.catalog_title" [nzLabel]="v.title"></nz-option>
+      </ng-container>
+    </nz-select>
+    <br />
+    <br />
+    <!-- <input formControlName="unit_price" nz-input placeholder="Description"> -->
+    <div class="flex">
+      Unit Price*: <nz-input-number formControlName="unit_price"></nz-input-number>
+      Quantity*: <nz-input-number formControlName="quantity"></nz-input-number>
+    </div>
+    <br />
+    <br />
+    <button type="submit" nz-button nzType="primary" nzBlock>Add</button>
+  </form>
+
+</div>
+
+<div *ngIf="processing" class="overlay">
+  <nz-spin></nz-spin>
+</div>

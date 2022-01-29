@@ -1,0 +1,47 @@
+<div (window:keydown)="keydown($event)">
+
+</div>
+<div nz-row nzJustify="end">
+  <div nz-col nzSpan="4">
+    <!-- <input #barRef type="text" autofocus> -->
+    <div #barRef></div>
+    <div *ngFor="let bar of barCodes">{{bar}}</div>
+  </div>
+</div>
+<p>please start scanning the barcode for releasing inventory...</p>
+
+<nz-table #editRowTable nzBordered [nzData]="inventoryData" [nzScroll]="{ x: '1150px', y: '600px' }" nzTableLayout="fixed">
+      <thead>
+        <tr>
+          <th nzWidth="100px">Id</th>
+          <th nzWidth="100px">type</th>
+          <th nzWidth="100px">product_id</th>
+          <th nzWidth="150px">product_title</th>
+          <th nzWidth="150px">variant_id</th>
+          <th nzWidth="150px">variant_title</th>
+          <th nzWidth="150px">catalog_id</th>
+          <th nzWidth="150px">catalog_title</th>
+          <th nzWidth="100px">quantity</th>
+          <th nzWidth="100px">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <ng-container>
+            <td nzWidth="100px">{{ data.id }}</td>
+            <td nzWidth="100px"> stock_out </td>
+            <td nzWidth="100px">{{ data.product_id }}</td>
+            <td nzWidth="150px">{{ data.product_title }}</td>
+            <td nzWidth="150px">{{ data.variant_id }}</td>
+            <td nzWidth="150px">{{ data.variant_title }}</td>
+            <td nzWidth="150px">{{ data.catalog_id }}</td>
+            <td nzWidth="150px">{{ data.catalog_title }}</td>
+            <td nzWidth="100px">
+              <!-- {{ data.total_quantity }} -->
+              <nz-input-number [(ngModel)]="data.total_quantity"  [nzMin]="1" [nzMax]="1000" [nzStep]="1"></nz-input-number>
+              </td>
+            <td nzWidth="100px"><button nz-button nzType="primary" (click)="onConfirm(data.id)"> CONFIRM </button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </nz-table>

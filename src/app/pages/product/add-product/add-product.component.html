@@ -1,0 +1,17 @@
+<div style="width: 400px; margin: auto">
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <input formControlName="title" nz-input placeholder="Product Title">
+    <br />
+    <br />
+    <input formControlName="description" nz-input placeholder="Product Description">
+    <br />
+    <br />
+    <button type="submit" nz-button nzType="primary" nzBlock>Add</button>
+  </form>
+
+</div>
+
+<div *ngIf="processing" class="overlay">
+  <nz-spin></nz-spin>
+</div>
